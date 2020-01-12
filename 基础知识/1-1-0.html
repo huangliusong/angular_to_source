@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+    <div ng-controller="contr">
+        {{ s }}
+        <div ng-bind="s"></div>
+    </div>
+    <script type="text/javascript">
+        var app=angular.module("test",[]);
+        app.controller("contr",function($scope){
+            $scope.s='hello,欢迎来到angular的世界！';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+</head>
+<body>
+<div ng-controller="test">
+    <button ng-click="btn1_Click('早上好')">按钮1</button>
+    <button ng-click="btn2_Click('下午好')">按钮2</button>
+</div>
+<script type="text/javascript">
+    var app=angular.module("app",[]);
+    app.config(function($provide){
+        $provide.factory("$a",["$window",function($window) {
+            return {
+                say: function (t) {
+                    $window.alert(t);
+                }
+            }
+        }])
+    })
+    app.config(function($provide){
+        $provide.service("$b",["$window",function($window) {
+            return {
+                log: function (t) {
+                    $window.console.log(t);
+                }
+            }
+        }])
+    })
+    //自定义控制器
+    var test=function($scope,$a,$b) {
+        $scope.btn1_Click = function (t) {
+            $a.say(t);
+        }
+        $scope.btn2_Click = function (t) {
+            $b.log(t);
+        }
+    }
+    //标记需要注入的服务对象
+    test.$inject=["$scope","$a","$b"];
+    //模块定义控制器
+    app.controller("test",test);
+</script>
+</body>
+</html>

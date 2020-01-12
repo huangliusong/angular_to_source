@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="filter">
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+    <title></title>
+    <style type="text/css">
+        .odd{
+            color:red;
+        }
+        .even{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="test">
+    <ul>
+        <li>
+            <span>序号</span>
+            <span ng-click="title='name';desc=!desc">姓名</span>
+            <span ng-click="title='age';desc=!desc">年龄</span>
+            <span ng-click="title='sex';desc=!desc">性别</span>
+            <span ng-click="title='score';desc=!desc">分数</span>
+        </li>
+        <li ng-repeat="stu in data | orderBy:title:desc"
+            ng-class-odd="'odd'"
+            ng-class-even="'even'">
+            <span>{{$index+1}}</span>
+            <span>{{stu.name}}</span>
+            <span>{{stu.age}}</span>
+            <span>{{stu.sex}}</span>
+            <span>{{stu.score}}</span>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    angular.module("filter",[])
+            .controller("test",["$scope",function($scope) {
+                $scope.data = [
+                    {name: "张明明", sex: "女", age: 24, score: 95},
+                    {name: "李清思", sex: "女", age: 27, score: 87},
+                    {name: "刘小华", sex: "男", age: 28, score: 86},
+                    {name: "陈忠忠", sex: "男", age: 23, score: 97}
+                ];
+                $scope.title='name';
+                $scope.desc=0;
+            }])
+</script>
+</body>
+</html>

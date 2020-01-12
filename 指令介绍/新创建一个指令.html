@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js"></script>
+</head>
+<body>
+     <ts-hello></ts-hello>
+     <div ts-hello></div>
+     <div class="ts-hello"></div>
+
+     <script type="text/javascript">
+         var test=angular.module("test",[])
+                 .directive("tsHello",function(){
+                     return {
+                         restrict: 'E',
+                         template: '<div>hedllo</div>'
+                     }
+                 })
+     </script>
+</body>
+</html>

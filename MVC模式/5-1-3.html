@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+    <title></title>
+    <style type="text/css">
+        .focus{
+            background-color: #666;
+            color:#fff;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div class="focus" ng-controller="c1">
+        第一个
+        {{name+'/'+sex+'/'+score}}
+        <div class="focus" ng-controller="c2">
+            第二个
+            {{name+'/'+sex+'/'+score+'/'+top}}
+            <div class="focus" ng-controller="c3">
+                第三个
+                {{name+'/'+sex+'/'+score}}
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var app=angular.module("app",[]);
+        app.controller("c1",["$scope",function($scope){
+            $scope.name="张三";
+            $scope.top="第一位";
+        }])
+        app.controller("c2",["$scope",function($scope){
+            $scope.sex="男";
+            $scope.top="第二位"
+        }])
+        app.controller("c3",["$scope",function($scope){
+            $scope.score="98";
+        }])
+    </script>
+</body>
+</html>

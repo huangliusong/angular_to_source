@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+    <div ng-controller="test">
+        <input type="text" ng-model="num" />
+        <div>{{result}}</div>
+        <button ng-click="send()">请求</button>
+    </div>
+    <script type="text/javascript">
+        angular.module("myApp",[])
+                .config(function ($httpProvider) {
+                    $httpProvider.defaults.headers.post = {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                    $httpProvider.defaults.transformRequest =
+                            function (obj) {
+                                var arrStr = [];
+                                for (var p in obj) {
+                                    arrStr.push(encodeURIComponent(p) + "="
+                                            + encodeURIComponent(obj[p]));
+                                }
+                                return arrStr.join("&");
+                            }
+                })
+                .controller("test",["$scope","$http",function($scope,$http){
+                    $scope.num="";
+                    $scope.result="";
+                    $scope.send=function() {
+                        $http({
+                            method: 'POST',
+                            url: 'data/chk.php',
+                            data: {
+                                n: $scope.num
+                            }
+                        })
+                        .success(function (data, status, headers, config) {
+                                    $scope.result = data;
+                                    console.log(status + "/" + headers + "/" + config);
+                                })
+                    }
+                }])
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+<div ng-controller="test">
+    <div>{{result}}</div>
+    <div>{{cache}}</div>
+    <button ng-click="send()">请求</button>
+    <button ng-click="refresh()">刷新</button>
+</div>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .service("$cache", function ($cacheFactory) {
+                return $cacheFactory("");
+            })
+            .controller("test",["$scope","$http","$cache",function($scope,$http,$cache){
+                var objcache=$cache;
+                $scope.result="...";
+                $scope.cache="...";
+                $scope.send=function() {
+                    $http({
+                        method: 'GET',
+                        url: 'data/cache.php',
+                        cache: true
+                    })
+                            .success(function (data, status, headers, config) {
+                                $scope.result = data;
+                                objcache.put("httpcach", data);
+                            })
+                }
+                $scope.refresh=function() {
+                    $scope.cache = "来源于缓存对象：" + objcache.get("httpcach");
+                }
+            }])
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+   <!-- json={name:'a',sex:'男'}-->
+    <div ng-controller="contr" ng-init="json=[{name:'a',sex:'男'},{name:'b',sex:'女'},{name:'ac',sex:'男'}]">
+        <ul>
+            <li ng-repeat="item in json|filter:{name:'a'}|limitTo:1">
+                {{item.name}},{{item.sex}}
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function contr($scope) {
+
+        }
+    </script>
+</body>
+</html>

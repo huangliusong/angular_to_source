@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+    <div ng-controller="test">
+        <div>{{result}}</div>
+        <button ng-click="send()">请求</button>
+    </div>
+    <script type="text/javascript">
+        angular.module("myApp",[])
+                .controller("test",["$scope","$http",function($scope,$http){
+                    $scope.result="";
+                    $scope.send=function() {
+                        $http.get('data/get.php')
+                                .success(function (data, status, headers, config) {
+                                    $scope.result = data;
+                                    console.log(status+"/"+headers+"/"+config);
+                                })
+                    }
+                }])
+    </script>
+</body>
+</html>

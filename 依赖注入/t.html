@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+</head>
+<body ng-controller="contr">
+    <input type="text" ng-model="text">
+    <div>{{text}}</div>
+    <input type="button" ng-click="btnClick();" value="点我就变化">
+
+    <script type="text/javascript">
+      var app=angular.module("app",[]);
+      //config功能：在代码之初，开始执行。
+      app.config(function($provide){
+          //非常通用的服务
+          $provide.factory("$a",["$window",function(window) {
+              return {
+                  content: "asdfds",
+                  say: function (t) {
+                      window.alert(t);
+                  }
+              }
+          }])
+
+          $provide.service("$b", ["$window", function ($window) {
+              return {
+                  log: function (t) {
+                      $window.console.log(t);
+                  }
+              }
+          }])
+      })
+
+//      app.controller("contr",["$a","$scope",function($a,a){
+//          a.text = "";
+//          a.btnClick = function () {
+//              $a.say(a.text);
+//          }
+//      }])
+
+//      function contr($a,$scope) {
+//          $scope.text = "";
+//          $scope.btnClick = function () {
+//             $a.say($scope.text );
+//          }
+//      }
+//      contr.$inject=["$a","$scope"];
+//      app.controller("contr",contr);
+
+      //大部分使用的方法是：
+      app.controller("contr",["$a","$b","$scope",function($a,$b,$scope){
+          $scope.text = "";
+          $scope.btnClick = function () {
+              $a.say($scope.text );
+           console.log("第二次输出"+$a.content);
+              $b.log($scope.text);
+          }
+      }]);
+
+
+//      app.controller("contr",["$scope",function(a) {
+      //          a.text = "";
+      //          a.btnClick = function () {
+      //              a.text = "今天天气不错2";
+      //          }
+      //      }])
+
+//        function contr($scope) {
+//            $scope.text = "";
+//            $scope.btnClick = function () {
+//                $scope.text = "今天天气不错2";
+//            }
+//        }
+//      app.controller("contr",contr);
+    </script>
+</body>
+</html>

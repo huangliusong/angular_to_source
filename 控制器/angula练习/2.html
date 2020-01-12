@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="mod">
+<head>
+    <meta charset="UTF-8" />
+    <title>模板</title>
+    <script type="text/javascript" src="../../Script/angular.min.js"></script>
+    <!-- 声明一个模板 -->
+    <script type="text/ng-template"
+            id="one">
+            <div>姓名：{{name}}</div>
+            <div>年龄：{{age}}</div>
+    </script>
+</head>
+<body>
+    <!-- 调用模板 -->
+    <div ng-controller="test"
+         ng-include src="'one'">
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var a=angular.module('mod',[])
+        a.controller('test',['$scope',function($scope){
+            $scope.name="张三";
+            $scope.age='同年同月';
+        }])
+</script>

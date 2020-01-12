@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+    <title></title>
+    <style type="text/css">
+        .focus{
+            background-color: #666;
+            color:#fff;
+            padding: 8px;
+            width: 260px;
+            margin: 10px 0px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="test">
+        <div class="focus">{{name}}</div>
+        <input type="text" ng-model="score" value="95">
+        <div class="focus">{{score}}</div>
+    </div>
+    <script type="text/javascript">
+        angular.module("app",[])
+                .controller("test",["$scope",function($scope){
+                    $scope.name="今天天气很热";
+                }])
+    </script>
+</body>
+</html>

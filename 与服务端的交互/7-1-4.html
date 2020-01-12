@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+<div ng-controller="test">
+    <input type="text" ng-model="val" />
+    <button ng-click="setV()">设置</button>
+    <button ng-click="getV()">读取</button>
+    <button ng-click="delV()">删除</button>
+    <div>{{result}}</div>
+</div>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .service("$cache", function ($cacheFactory) {
+                return $cacheFactory("");
+            })
+            .controller("test",["$scope","$cache",function($scope,$cache) {
+                $scope.val = "";
+                $scope.result = "";
+                var cache = $cache;
+                $scope.setV = function () {
+                    cache.put("t2", $scope.val);
+                }
+                $scope.getV = function () {
+                    $scope.result =cache.get("t2");
+                }
+                $scope.delV = function () {
+                    cache.remove("t2");
+                }
+            }])
+</script>
+</body>
+</html>

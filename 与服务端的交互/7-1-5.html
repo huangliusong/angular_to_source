@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+<div ng-controller="test">
+    <div>{{result}}</div>
+    <div>{{cache}}</div>
+    <button ng-click="send()">请求</button>
+</div>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .controller("test",["$scope","$http","$cacheFactory",function($scope,$http,$cacheFactory){
+                var objCache=$cacheFactory.get("$http");
+                var url='data/cache.php';
+                $scope.result="...";
+                $scope.cache="...";
+                $scope.send=function() {
+                    $http({
+                        method: 'GET',
+                        url: 'data/cache.php',
+                        cache: true
+                    })
+                            .success(function (data, status, headers, config) {
+                                $scope.result = data;
+                                $scope.cache = "来源于缓存：" + objCache.get(url)[1];
+                            })
+                }
+            }])
+</script>
+</body>
+</html>

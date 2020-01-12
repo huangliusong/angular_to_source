@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+    <div ng-controller="contr">
+        {{ value | uppercase }}
+    </div>
+    <script type="text/javascript">
+        function contr($scope) {
+            $scope.value = 'def';
+        }
+    </script>
+</body>
+</html>

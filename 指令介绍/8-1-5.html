@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+</head>
+<body>
+<div ng-controller="test">
+    <ts-hello></ts-hello>
+    <div>{{content}}</div>
+</div>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .directive("tsHello",function(){
+                return{
+                    restrict:'EAC',
+                    compile:function(){
+                        console.log("正在编译指令");
+                        return{
+                            pre:function(scope,iEle,iAtrrs){
+                                console.log("正在执行pre函数");
+                            },
+                            post:function(scope,iEle,iAtrrs){
+                                console.log("正在执行post函数");
+                            }
+                        }
+                    }
+                }
+            })
+            .controller("test",function($scope) {
+                $scope.content="等待指令的解析";
+            })
+</script>
+</body>
+</html>

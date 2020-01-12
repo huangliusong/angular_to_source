@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js">
+    </script>
+    <script type="text/ng-template" id="tpl">
+        <div>这是一个模板元素中的内容</div>
+        <input type="text" ng-model="content" />
+        <div ng-transclude></div>
+    </script>
+</head>
+<body>
+<div ng-controller="test">
+    <ts-hello>{{content}}</ts-hello>
+</div>
+<script type="text/javascript">
+    angular.module("myApp",[])
+            .directive("tsHello",function(){
+                return{
+                    restrict:'EAC',
+                    templateUrl:'tpl',
+                    transclude:true
+                }
+            })
+            .controller("test",function($scope) {
+                $scope.content="";
+            })
+</script>
+</body>
+</html>

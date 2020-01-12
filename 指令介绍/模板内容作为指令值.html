@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript"
+            src="../Script/angular.min.js"></script>
+    <script type="text/ng-template" id="a">
+        <div>123456</div>
+    </script>
+</head>
+<body>
+    <ts-tmp></ts-tmp>
+    <script type="text/javascript">
+        var test=angular.module("test",[])
+                .run(function($templateCache){
+                    $templateCache.put("b","<div>456789</div>")
+                })
+                .directive("tsTmp",function(){
+                    return {
+                        restrict: 'E',
+                        templateUrl: 'b'
+                    }
+                })
+    </script>
+</body>
+</html>

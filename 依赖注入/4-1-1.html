@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../Script/angular.min.js"
+            type="text/javascript"></script>
+</head>
+<body>
+    <div ng-controller="test">
+        <div>{{text}}</div>
+        <button ng-click="btnClick()">点我就变化内容</button>
+    </div>
+    <script type="text/javascript">
+        angular.module("app",[]).
+                //controller("test",["$scope",function($scope){
+                    //$scope.text="";
+                    //$scope.btnClick=function(){
+                        //$scope.text="今天天气不错";
+                    //}
+                //}])
+        config(function($controllerProvider){
+                    $controllerProvider.register("test",["$scope",function($scope) {
+                        $scope.text = "";
+                        $scope.btnClick = function () {
+                            $scope.text = "今天天气不错2";
+                        }
+                    }])
+                })
+    </script>
+</body>
+</html>
